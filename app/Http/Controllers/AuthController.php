@@ -23,4 +23,9 @@ class AuthController extends Controller
             return response(['message' => 'Invalid Email or Password!'], 422);
         }
     }
+    
+    public function logout()
+    {
+        return response('', 204);
+    }
 }
