@@ -19,10 +19,10 @@ class Users extends Model
 
     public static function login($email, $password)
     {
-        $model = self::where('email', $email)->get();
+        $model = self::where('email', $email)->first();
 
-        if (Hash::check($password, $model[0]->password)) {
-            return $model[0];
+        if (Hash::check($password, $model->password)) {
+            return $model;
         }
 
         return false;
