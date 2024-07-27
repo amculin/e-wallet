@@ -15,7 +15,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('id', true);
             $table->char('code', 3);
             $table->string('name', 48);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
 

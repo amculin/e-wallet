@@ -15,7 +15,8 @@ return new class extends Migration
             $table->integerIncrements('user_id');
             $table->unsignedSmallInteger('bank_id');
             $table->unsignedBigInteger('account_number');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
 

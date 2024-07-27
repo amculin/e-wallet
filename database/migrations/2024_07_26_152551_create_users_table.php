@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->unsignedTinyInteger('type')->comment('1 = Admin; 2 = User;');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
         });
