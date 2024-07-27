@@ -4,9 +4,22 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TransactionSeeder extends Seeder
 {
+    public function createRandomID()
+    {
+        $randomString = md5(Str::random(7));
+        $newStrings = [
+            substr($randomString, 0, 8),
+            substr($randomString, 8, 16),
+            substr($randomString, 24)
+        ];
+
+        return implode('-', $newStrings);
+    }
+
     /**
      * Run the database seeds.
      */
@@ -14,6 +27,7 @@ class TransactionSeeder extends Seeder
     {
         DB::table('transaction')->insert([
             'wallet_id' => 1,
+            'order_id' => $this->createRandomID(),
             'amount' => 150000.00,
             'type' => 1,
             'status' => 1,
@@ -27,6 +41,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 1,
+            'order_id' => $this->createRandomID(),
             'amount' => 117600.00,
             'type' => 3,
             'status' => 1,
@@ -39,6 +54,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 1,
+            'order_id' => $this->createRandomID(),
             'amount' => 250000.00,
             'type' => 1,
             'status' => 1,
@@ -52,6 +68,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 2,
+            'order_id' => $this->createRandomID(),
             'amount' => 500000.00,
             'type' => 1,
             'status' => 1,
@@ -65,6 +82,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 2,
+            'order_id' => $this->createRandomID(),
             'amount' => 15500.00,
             'type' => 3,
             'status' => 1,
@@ -77,6 +95,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 2,
+            'order_id' => $this->createRandomID(),
             'amount' => 37000.00,
             'type' => 3,
             'status' => 1,
@@ -89,6 +108,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 2,
+            'order_id' => $this->createRandomID(),
             'amount' => 89542.00,
             'type' => 3,
             'status' => 1,
@@ -101,6 +121,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 1,
+            'order_id' => $this->createRandomID(),
             'amount' => 74800.00,
             'type' => 3,
             'status' => 1,
@@ -113,6 +134,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 1,
+            'order_id' => $this->createRandomID(),
             'amount' => 25500.00,
             'type' => 3,
             'status' => 1,
@@ -125,6 +147,7 @@ class TransactionSeeder extends Seeder
         ]);
         DB::table('transaction')->insert([
             'wallet_id' => 1,
+            'order_id' => $this->createRandomID(),
             'amount' => 1000000.00,
             'type' => 2,
             'status' => 0,
