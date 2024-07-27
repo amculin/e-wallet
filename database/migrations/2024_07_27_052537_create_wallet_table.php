@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('wallet', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('amount');
+            $table->decimal('balance', 10, 2);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
 

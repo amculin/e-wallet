@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('user_account', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
             $table->unsignedSmallInteger('bank_id');
-            $table->unsignedBigInteger('account_number');
+            $table->string('account_number', 20);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->unsignedTinyInteger('type')->comment('1 = Admin; 2 = User;');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
         });

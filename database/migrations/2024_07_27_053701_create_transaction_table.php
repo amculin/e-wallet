@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('transaction', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('wallet_id');
-            $table->unsignedInteger('amount');
-            $table->unsignedTinyInteger('type')->comment('1 = Deposit; 2 = Withdrawal;');
+            $table->decimal('amount', 10, 2);
+            $table->unsignedTinyInteger('type')->comment('1 = Deposit; 2 = Withdrawal; 3 = Purchase');
+            $table->unsignedTinyInteger('status')->comment('0 = Failed; 1 = Success;')->default(1);
             $table->json('additional_data');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
 
