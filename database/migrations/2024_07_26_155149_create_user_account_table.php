@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_account', function (Blueprint $table) {
-            $table->integerIncrements('user_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedSmallInteger('bank_id');
             $table->unsignedBigInteger('account_number');
             $table->timestamp('created_at')->useCurrent();
@@ -20,14 +20,16 @@ return new class extends Migration
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
 
+            $table->primary(['user_id', 'bank_id', 'account_number']);
+
             $table->foreign('user_id')->references('id')->on('users')
-                ->cascadeOnUpdate()->cascadeOnDelete();;
+                ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('bank_id')->references('id')->on('ref_bank')
-                ->cascadeOnUpdate()->cascadeOnDelete();;
+                ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('created_by')->references('id')->on('users')
-                ->cascadeOnUpdate()->cascadeOnDelete();;
+                ->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('updated_by')->references('id')->on('users')
-                ->cascadeOnUpdate()->cascadeOnDelete();;
+                ->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
