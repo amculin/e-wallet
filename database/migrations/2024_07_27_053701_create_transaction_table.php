@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('transaction', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('wallet_id');
+            $table->char('order_id', 34)->unique(true);
             $table->decimal('amount', 10, 2);
             $table->unsignedTinyInteger('type')->comment('1 = Deposit; 2 = Withdrawal; 3 = Purchase');
             $table->unsignedTinyInteger('status')->comment('0 = Failed; 1 = Success;')->default(1);
