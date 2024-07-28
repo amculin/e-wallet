@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WalletController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/wallet', [WalletController::class, 'index']);
+Route::post('/wallet/deposit', [WalletController::class, 'deposit']);
+Route::post('/wallet/withdrawal', [WalletController::class, 'withdrawal']);
+Route::post('/wallet/purchase', [WalletController::class, 'purchase']);

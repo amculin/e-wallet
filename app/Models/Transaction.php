@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wallet extends Model
+class Transaction extends Model
 {
     use HasFactory;
+
+    const DEPOSIT = 1;
+    const WITHDRAWAL = 2;
+    const PURCHASE = 3;
+
+    const IS_FAILED = 0;
+    const IS_SUCCESS = 1;
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'wallet';
-
-    public static function getBalance($userID)
-    {
-        return self::where('user_id', $userID)
-            ->first();
-    }
+    protected $table = 'transaction';
 }

@@ -27,4 +27,12 @@ class Users extends Model
 
         return false;
     }
+
+    public static function findUserByToken($token)
+    {
+        $fullName = base64_decode($token);
+        $model = self::where('full_name', $fullName)->first();
+
+        return $model;
+    }
 }
