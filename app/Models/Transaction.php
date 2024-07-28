@@ -13,7 +13,7 @@ class Transaction extends Model
     const WITHDRAWAL = 2;
     const PURCHASE = 3;
 
-    const IS_FAILED = 0;
+    const IS_FAILED = 2;
     const IS_SUCCESS = 1;
 
     /**
