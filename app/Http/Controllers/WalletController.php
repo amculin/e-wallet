@@ -109,6 +109,42 @@ class WalletController extends Controller
 
     public function purchase(Request $request)
     {
+        $user = $this->authChecker($request->bearerToken());
+        $wallet = Wallet::getBalance($user->id);
 
+        $additionalData = $request->input('additional_data');
+        $additionalData['client_time'] = $request->input('timestamp');
+
+        if ($request->amount > $wallet->balance) {
+            $status = Transaction::IS_FAILED;
+            $updateBalance = false;
+        } else {
+            $status = Transaction::IS_SUCCESS;
+            $updateBalance = true;
+        }
+
+        $transaction = new Transaction;
+        $transaction->wallet_id = $wallet->id;
+        $transaction->order_id = $request->input('order_id');
+        $transaction->amount = $request->input('amount');
+        $transaction->type = Transaction::PURCHASE;
+        $transaction->status = $status;
+        $transaction->additional_data = json_encode($additionalData);
+        $transaction->created_by = $user->id;
+        $transaction->save();
+
+        if ($updateBalance) {
+            $wallet->balance = $wallet->balance - $transaction->amount;
+            $wallet->updated_by = $user->id;
+            $wallet->save();
+        } else {
+            return response(['message' => 'Insufficient Balance!'], 422);
+        }
+
+        return [
+            'order_id' => $transaction->order_id,
+            'amount' => $transaction->amount,
+            'status' => $status
+        ];
     }
 }
