@@ -10,6 +10,9 @@ class Users extends Model
 {
     use HasFactory;
 
+    const ADMIN = 1;
+    const USER = 2;
+
     /**
      * The table associated with the model.
      *
@@ -31,7 +34,15 @@ class Users extends Model
     public static function findUserByToken($token)
     {
         $fullName = base64_decode($token);
-        $model = self::where('full_name', $fullName)->first();
+        $model = self::where('full_name', $fullName)->where('type', self::USER)->first();
+
+        return $model;
+    }
+
+    public static function findAdminByToken($token)
+    {
+        $fullName = base64_decode($token);
+        $model = self::where('full_name', $fullName)->where('type', self::ADMIN)->first();
 
         return $model;
     }
